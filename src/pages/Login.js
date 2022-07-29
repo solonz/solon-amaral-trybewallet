@@ -31,7 +31,7 @@ class Login extends React.Component {
   }
 
   render() {
-    const { email, password } = this.state;
+    // const { email, password } = this.state;
     return (
       <div>
         <h1>Faça o seu login</h1>
@@ -80,11 +80,11 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  dispatchUserDataToGlobalState: (data) => dispatch(loginClick(data)),
+  dispatchUserDataToGlobalState: (payload) => dispatch(loginClick(payload)),
 });
 
 Login.propTypes = {
-  // mail: propType.func.isRequired,
+  dispatchUserDataToGlobalState: propType.func.isRequired,
   history: propType.objectOf(propType.any).isRequired,
 };
 
