@@ -27,9 +27,9 @@ export default class Header extends Component {
             {' '}
             {totalField}
             {' '}
-            <h4 data-testid="header-currency-field">
+            <span data-testid="header-currency-field">
               {currency}
-            </h4>
+            </span>
           </h3>
         </div>
       </div>
