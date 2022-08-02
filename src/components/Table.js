@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { deleteExpense, currencyAsk} from '../redux/actions'; 
 
 class Table extends Component {
+
+  deleteExpense(expenseId) {
+    const {deleteExpenseDispatch, currencyAskDispatch} = this.props;
+    deleteExpenseDispatch(expenseId);
+    currencyAskDispatch()
+  }
   render() {
     const { expenses } = this.props;
 
@@ -24,7 +31,7 @@ class Table extends Component {
           </thead>
           <tbody>
             {expenses.map((e) => (
-              <tr key={ expenses[e] }>
+              <tr key={ e.id }>
                 <td>
                   {parseFloat(e.value).toFixed(2)}
                 </td>
@@ -51,7 +58,7 @@ class Table extends Component {
                 </td>
                 <td>
                   <button type="button"> Editar </button>
-                  <button type="button"> Excluir </button>
+                  <button type="button" data-testid="delete-btn" onClick={ () => { this.deleteExpense(e.id) } }> Excluir </button>
                 </td>
               </tr>
             ))}
@@ -66,13 +73,13 @@ const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  deleteExpenseDispatch: (expenseId) => dispatch(deleteExpense(expenseId)),
+  currencyAskDispatch: (ask) => dispatch(currencyAsk(ask)),
+});
+
 Table.propTypes = {
   expenses: PropTypes.string.isRequired,
-  // value: PropTypes.number.isRequired,
-  // tag: PropTypes.string.isRequired,
-  // description: PropTypes.string.isRequired,
-  // method: PropTypes.string.isRequired,
-  // currency: PropTypes.string.isRequired,
 };
 
-export default connect(mapStateToProps)(Table);
+export default connect(mapStateToProps, mapDispatchToProps)(Table);

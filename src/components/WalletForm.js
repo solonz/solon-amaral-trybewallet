@@ -24,13 +24,10 @@ class WalletForm extends Component {
 
   async exchange() {
     const { currencyAskDispatch, addFormToTableDispatch } = this.props;
-    const { currency, value } = this.state;
     const currenciesRate = await currenciesData();
     this.setState({ exchangeRates: currenciesRate },
       () => { addFormToTableDispatch(this.state); });
-    const rate = currenciesRate[currency];
-    const conversion = rate.ask * value;
-    currencyAskDispatch(conversion);
+      currencyAskDispatch();
     this.setState({
       value: '',
       description: '',
@@ -121,7 +118,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getCurrencies: () => dispatch(fetchAPI()),
   addFormToTableDispatch: (state) => dispatch(addFormToTable(state)),
-  currencyAskDispatch: (ask) => dispatch(currencyAsk(ask)),
+  currencyAskDispatch: () => dispatch(currencyAsk()),
 });
 
 WalletForm.propTypes = {
