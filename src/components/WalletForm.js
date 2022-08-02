@@ -27,7 +27,7 @@ class WalletForm extends Component {
     const currenciesRate = await currenciesData();
     this.setState({ exchangeRates: currenciesRate },
       () => { addFormToTableDispatch(this.state); });
-      currencyAskDispatch();
+    currencyAskDispatch();
     this.setState({
       value: '',
       description: '',

@@ -29,10 +29,10 @@ const walletData = (state = INITIAL_STATE, action) => {
       // totalField: state.totalField + action.ask,
       totalField: state.expenses.length < 1 ? 0 : state.expenses.reduce((acc, curr) => {
         const { value, currency, exchangeRates } = curr;
-        const {ask} = exchangeRates[currency];
+        const { ask } = exchangeRates[currency];
         const conversion = parseFloat(ask) * parseFloat(value);
         return acc + conversion;
-      }, 0)
+      }, 0),
     };
   case DELETE_EXPENSE:
     return {
