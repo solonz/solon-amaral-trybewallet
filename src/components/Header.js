@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import store from '../redux/store';
 
-export default class Header extends Component {
+class Header extends Component {
   constructor() {
     super();
     this.state = {
-      totalField: 0,
       currency: 'BRL',
     };
   }
 
   render() {
-    const { totalField, currency } = this.state;
+    const { currency } = this.state;
+    const { totalField } = this.props;
     return (
       <div>
         <h1>Your Wallet</h1>
@@ -22,11 +24,12 @@ export default class Header extends Component {
             {' '}
             {store.getState().user.email}
           </h3>
-          <h3 data-testid="total-field">
+          <h3>
             Despesa Total R$
             {' '}
-            {totalField}
-            {' '}
+            <span data-testid="total-field">
+              {totalField.toFixed(2)}
+            </span>
             <span data-testid="header-currency-field">
               {currency}
             </span>
@@ -36,3 +39,13 @@ export default class Header extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  totalField: state.wallet.totalField,
+});
+
+Header.propTypes = {
+  totalField: PropTypes.string.isRequired,
+};
+
+export default connect(mapStateToProps)(Header);
