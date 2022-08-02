@@ -9,47 +9,53 @@ class Table extends Component {
     return (
       <div>
         <table>
-          <th>Valor</th>
-          <th>Descrição</th>
-          <th>Tag</th>
-          <th>Moeda</th>
-          <th>Câmbio utilizado</th>
-          <th>Valor convertido</th>
-          <th>Moeda de conversão</th>
-          <th>Método de pagamento</th>
-          <th>Editar/Excluir</th>
-          {expenses.map((e) => (
-            <tr key={ expenses[e] }>
-              <td>
-                {e.value}
-              </td>
-              <td>
-                {e.description}
-              </td>
-              <td>
-                {e.tag}
-              </td>
-              <td>
-                {e.currency}
-              </td>
-              <td>
-                {parseFloat(e.exchangeRates[e.currency].ask).toFixed(2)}
-              </td>
-              <td>
-                {parseFloat(e.exchangeRates[e.currency].ask * e.value).toFixed(2)}
-              </td>
-              <td>
-                Real
-              </td>
-              <td>
-                {e.method}
-              </td>
-              <td>
-                <button type="button"> Editar </button>
-                <button type="button"> Excluir </button>
-              </td>
+          <thead>
+            <tr>
+              <th>Valor</th>
+              <th>Descrição</th>
+              <th>Tag</th>
+              <th>Moeda</th>
+              <th>Câmbio utilizado</th>
+              <th>Valor convertido</th>
+              <th>Moeda de conversão</th>
+              <th>Método de pagamento</th>
+              <th>Editar/Excluir</th>
             </tr>
-          ))}
+          </thead>
+          <tbody>
+            {expenses.map((e) => (
+              <tr key={ expenses[e] }>
+                <td>
+                  {parseFloat(e.value).toFixed(2)}
+                </td>
+                <td>
+                  {e.description}
+                </td>
+                <td>
+                  {e.tag}
+                </td>
+                <td>
+                  {e.exchangeRates[e.currency].name}
+                </td>
+                <td>
+                  {parseFloat(e.exchangeRates[e.currency].ask).toFixed(2)}
+                </td>
+                <td>
+                  {parseFloat(e.exchangeRates[e.currency].ask * e.value).toFixed(2)}
+                </td>
+                <td>
+                  Real
+                </td>
+                <td>
+                  {e.method}
+                </td>
+                <td>
+                  <button type="button"> Editar </button>
+                  <button type="button"> Excluir </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
     );
