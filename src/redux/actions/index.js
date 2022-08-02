@@ -6,6 +6,7 @@ export const FETCH_API = 'FETCH_API';
 export const FAILURE_API = 'FAILURE_API';
 export const ADD_FORM_TO_TABLE = 'ADD_FORM_TO_TABLE';
 export const CURRENCY_ASK = 'CURRENCY_ASK';
+export const Alimentacao = 'Alimentação';
 
 export const loginClick = (payload) => ({ type: LOGIN_CLICK_SUCCEED, payload });
 export const successAPI = (currencies) => ({ type: FETCH_API, currencies });

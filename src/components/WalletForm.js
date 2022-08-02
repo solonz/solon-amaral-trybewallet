@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchAPI, addFormToTable, currencyAsk } from '../redux/actions';
+import { fetchAPI, addFormToTable, currencyAsk, Alimentacao } from '../redux/actions';
 import { currenciesData } from '../services/API';
 
 class WalletForm extends Component {
@@ -12,7 +12,7 @@ class WalletForm extends Component {
       description: '',
       currency: 'USD',
       method: 'Dinheiro',
-      tag: 'Alimentação',
+      tag: Alimentacao,
       exchangeRates: [],
     };
   }
@@ -36,13 +36,13 @@ class WalletForm extends Component {
       description: '',
       currency: 'USD',
       method: 'Dinheiro',
-      tag: 'Alimentação',
+      tag: Alimentacao,
       exchangeRates: [],
     });
   }
 
   render() {
-    const { currencies, addFormToTableDispatch } = this.props;
+    const { currencies } = this.props;
     const { value, description, currency, method, tag } = this.state;
     return (
       <form>
