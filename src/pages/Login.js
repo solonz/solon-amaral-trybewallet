@@ -18,10 +18,7 @@ class Login extends React.Component {
     const validadeEmail = emailRegex.test(email);
     const MIN_CHARS = 6;
     const validadePassword = password.length >= MIN_CHARS;
-    if (validadeEmail && validadePassword) {
-      return false;
-    }
-    return true;
+    return (validadeEmail && validadePassword);
   }
 
   loginSucceed = () => {
