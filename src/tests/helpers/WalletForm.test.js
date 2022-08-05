@@ -2,6 +2,8 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import WalletForm from '../../components/WalletForm';
+import Wallet from '../../pages/Wallet';
+import mockData from './mockData';
 import { renderWithRouterAndRedux, renderWithRedux } from './renderWith';
 
 describe('walletForm component', () => {
@@ -19,7 +21,7 @@ describe('walletForm component', () => {
       });
 
       it('testing inputs the WalletForm', () => {
-        renderWithRouterAndRedux(<WalletForm />)
+        renderWithRouterAndRedux(<WalletForm />);
         const inputValue = screen.getByTestId('value-input');
         expect(inputValue).toBeInTheDocument();
         expect(inputValue).toHaveAttribute('value', '');
@@ -35,5 +37,14 @@ describe('walletForm component', () => {
         const optionTransport = screen.getByRole('option', { name: 'Transporte'})
         expect(optionTransport).toBeInTheDocument();
            });
+      it('testing inputs onChange', async () => {
+        renderWithRouterAndRedux(<Wallet />);
+        const descriptionInput = screen.getByRole('textbox');
+        const expenseButton =  screen.getByRole('button', { name: /adicionar despesa/i });
+
+        userEvent.type(descriptionInput, 'Xablau');
+        userEvent.click(expenseButton);
+        expect(await screen.findByRole('cell', { name: /Xablau/i })).toBeInTheDocument();
+      });
     });
 

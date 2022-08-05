@@ -60,5 +60,16 @@ describe('table at wallet page', () => {
     expect(screen.getByRole('columnheader', { name: /câmbio utilizado/i })).toBeInTheDocument();
     expect(screen.getByTestId('delete-btn')).toBeInTheDocument();
   })
+  test('if delete expense works', () => {
+    renderWithRouterAndRedux(<Wallet />, {initialState: initialState})
+    const inputValue = screen.getByTestId('value-input');
+    const expenseButton =  screen.getByRole('button', { name: /adicionar despesa/i });
+    const deleteButton = screen.getByTestId('delete-btn');
+    userEvent.type(inputValue, '1');
+    userEvent.click(expenseButton);
+    userEvent.click(deleteButton);
+
+    expect(deleteButton).not.toBeInTheDocument();
+  })
 });
 
