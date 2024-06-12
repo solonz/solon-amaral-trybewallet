@@ -1,5 +1,5 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
-import { ADD_FORM_TO_TABLE, FETCH_API, CURRENCY_ASK, DELETE_EXPENSE } from '../actions';
+import { ADD_FORM_TO_TABLE, FETCH_API, CURRENCY_ASK, DELETE_EXPENSE, EDIT_EXPENSE } from '../actions';
 
 const INITIAL_STATE = {
   description: '',
@@ -38,6 +38,11 @@ const walletData = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       expenses: state.expenses.filter((expense) => expense.id !== action.expenseId),
+    };
+  case EDIT_EXPENSE:
+    return {
+      ...state,
+      description: action.description,
     };
   default:
     return state;
